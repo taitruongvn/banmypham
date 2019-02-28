@@ -1,0 +1,60 @@
+﻿
+@{
+    ViewBag.Title = "Đăng nhập";
+    <title>Đăng nhập</title>
+    Layout = "~/Views/Layout/NguoiDung/_LayoutLoginUser.cshtml";
+}
+
+<div class="limiter">
+    <div class="container-login100">
+        <div class="wrap-login1002 p-t-20 p-b-20">
+            <div class="login100-form validate-form">
+                <span class="login100-form-title p-b-20">
+                    Đăng nhập
+                </span>
+                <span class="login100-form-avatar">
+                    <img src="~/LayoutSources/UserLogin/images/avatar-01.jpg" alt="AVATAR">
+                </span>
+
+                @using (Html.BeginForm("DangNhap","TaiKhoanUser", FormMethod.Post))
+                {
+                    <div class="wrap-input100 validate-input m-t-20 m-b-35" data-validate="Mời nhập tài khoản">
+                            <input class="input100" type="text" name="username">
+                            <span class="focus-input100" data-placeholder="Username"></span>
+
+                        </div>
+
+                        <div class="wrap-input100 validate-input m-b-50" data-validate="Mời nhập mật khẩu">
+                            <input class="input100" type="password" name="pass">
+                            <span class="focus-input100" data-placeholder="Password"></span>
+
+
+                        </div>
+
+                    <div class="container-login100-form-btn">
+                            <input type="submit" value="Đăng nhập" class="login100-form-btn" />
+                        </div>
+                }
+
+                <ul class="login-more p-t-20">
+                    <li>
+                        <span class="txt1">
+                            Chưa có tài khoản à?
+                        </span>
+
+                        <a href="@Url.Action("DangKy","TaiKhoanUser")" class="txt2">
+                            Đăng ký luôn
+                        </a>
+                    </li>
+                </ul>
+                <ul class="login-more p-t-20">
+                    <li>
+                        <a href="@Url.Action("TrangChu","NguoiDung")" class="txt2">
+                            Về trang chủ
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

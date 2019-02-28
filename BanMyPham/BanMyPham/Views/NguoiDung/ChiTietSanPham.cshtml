@@ -1,0 +1,120 @@
+﻿@using BanMyPham.Models;
+@model SanPham
+
+@{
+    ViewBag.Title = "Chi tiết sản phẩm";
+    Layout = "~/Views/Layout/NguoiDung/_NguoiDungLayout.cshtml";
+}
+
+<!-- Product Detail -->
+<section class="sec-product-detail bg0 p-t-65 p-b-20">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-lg-7 p-b-30">
+                <div class="p-l-25 p-r-30 p-lr-0-lg">
+                    <div class="wrap-slick3 flex-sb flex-w">
+                        <div class="wrap-slick3-dots"></div>
+                        <div class="wrap-slick3-arrows flex-sb-m flex-w"></div>
+
+                        <div class="slick3 gallery-lb">
+                            <div class="item-slick3" data-thumb="@Url.Content("~/LayoutSources/images/"+ Model.HinhAnh+".jpg")">
+                                <div class="wrap-pic-w pos-relative">
+                                    <img src="@Url.Content("~/LayoutSources/images/"+ Model.HinhAnh+".jpg") " alt="IMG-PRODUCT">
+                                    <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="@Url.Content("~/LayoutSources/images/"+ Model.HinhAnh+".jpg")">
+                                        <i class="fa fa-expand"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-5 p-b-30">
+                <div class="p-r-50 p-t-5 p-lr-0-lg">
+                    <h4 class="mtext-105 cl2 js-name-detail p-b-14">
+                        @Model.TenSanPham
+                    </h4>
+
+                    <span class="mtext-106 cl2">
+                        @if (Model.GiamGia > 0 && Model.GiamGia != null)
+                        {
+                            <p style="text-decoration-line: line-through; font-style: italic">@string.Format("{0:c}", Model.DonGia)</p> <p style="color: red">@string.Format("{0:c}", Model.DonGia - Model.GiamGia)</p>
+                        }
+                        else
+                        {
+                            <p>@string.Format("{0:c}", Model.DonGia)</p>
+                        }
+                    </span>
+
+                    <p class="stext-102 cl3 p-t-23">
+                        @Model.MoTa
+                    </p>
+
+                    <!--  -->
+                    @using (Html.BeginForm("ThemVaoGioHang", "NguoiDung", new { @sMaSanPham = Model.MaSanPham, @sUrl = Request.Url.ToString() }))
+                    {
+                        <div class="p-t-33">
+                            <div class="flex-w flex-r-m p-b-10">
+                                <div class="size-204 flex-w flex-m respon6-next">
+                                    <div class="wrap-num-product flex-w m-r-20 m-tb-10">
+                                        <div class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m">
+                                            <i class="fs-16 zmdi zmdi-minus"></i>
+                                        </div>
+
+                                        <input class="mtext-104 cl3 txt-center num-product" type="number" name="iSoLuong" value="1">
+
+                                        <div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
+                                            <i class="fs-16 zmdi zmdi-plus"></i>
+                                        </div>
+                                    </div>
+
+                                    <button class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
+                                        Thêm vào giỏ hàng
+                                    </button>
+
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    <!--  -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="bg6 flex-c-m flex-w size-302 m-t-20 p-tb-15">
+        <span class="stext-107 cl6 p-lr-25">
+            Mã sản phẩm: @Model.MaSanPham
+        </span>
+
+        <span class="stext-107 cl6 p-lr-25">
+            Nhóm hàng: @ViewBag.TenNhomHang
+        </span>
+    </div>
+</section>
+
+
+<!-- Related Products -->
+<section class="sec-relate-product bg0 p-t-10 p-b-20">
+    <div class="container">
+        <div class="p-b-20">
+            <h3 class="ltext-106 cl5 txt-center">
+                Sản phẩm liên quan
+            </h3>
+        </div>
+
+        <!-- Slide2 -->
+        @Html.Action("SanPhamLienQuan", "NguoiDung")
+    </div>
+</section>
+
+<style>
+    .section-slide {
+        display: none;
+    }
+
+    .sec-banner {
+        display: none;
+    }
+</style>

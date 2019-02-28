@@ -1,0 +1,22 @@
+﻿<div class="top-bar">
+    <div class="content-topbar flex-sb-m h-full container">
+        <div class="left-top-bar">
+            Mua sắm cùng BamBam Shop nhé!
+        </div>
+
+        <div class="right-top-bar">
+
+            @if (Session["TaiKhoanUser"] == null)
+            {
+                <a href="@Url.Action("DangNhap", "TaiKhoanUser")">Đăng nhập</a>
+                <a href="@Url.Action("DangKy", "TaiKhoanUser")">Đăng ký</a>
+            }
+            else
+            {
+                <a href="@Url.Action("Index", "TaiKhoanManager")"><b>@Session["TenKhachHang"]</b></a>
+                <a href="@Url.Action("DangXuat", "TaiKhoanUser")">Đăng xuất</a>
+            }
+
+        </div>
+    </div>
+</div>

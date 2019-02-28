@@ -1,0 +1,72 @@
+﻿@model BanMyPham.Models.KhachHang
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Layout/NguoiDung/_NguoiDungLayout.cshtml";
+}
+
+
+<div class="container" style="margin-top: 100px; margin-bottom: 10px"> 
+    <div class="row">       
+        @*Thông tin khách hàng*@
+        <div class="col-sm-4">
+            <b>THÔNG TIN KHÁCH HÀNG</b>
+            <table class="table table-striped">
+                <tbody>
+                    <tr>
+                        <th scope="row">Tên</th>
+                        <td>@Html.DisplayFor(model => model.TenKhachHang)</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Địa chỉ</th>
+                        <td>@Html.DisplayFor(model => model.DiaChi)</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Số điện thoại</th>
+                        <td>@Html.DisplayFor(model => model.SoDienThoai)</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Giới tính</th>
+                        <td>
+                            @if (Model.GioiTinh == true)
+                            {
+                                <p>Nam</p>
+                            }
+                            else
+                            {
+                                <p>Nữ</p>
+                            }
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Email</th>
+                        <td>@Html.DisplayFor(model => model.Email)</td>
+                    </tr>
+                    <tr>
+                        <th scope="row"></th>
+                        <td>
+                            <p>
+                                @Html.ActionLink("Chỉnh sửa", "Edit", new { id = Model.MaKhachHang })
+                            </p>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        @*Đơn hàng chờ xử lý*@      
+        <div class="col-sm-8">           
+            @Html.Action("DonHangKhachHang", "TaiKhoanManager")
+        </div>
+    </div>
+</div>
+<style>
+    .section-slide {
+        display: none;
+    }
+
+    .sec-banner {
+        display: none;
+    }
+</style>
+

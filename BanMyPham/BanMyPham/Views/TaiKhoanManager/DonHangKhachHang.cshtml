@@ -1,0 +1,186 @@
+﻿@model IEnumerable<BanMyPham.Models.DonHang>
+
+@if (Model.Count() == 0)
+{
+    <p>Không có đơn hàng nào</p>
+}
+else
+{
+    int coutfalse = 0;
+    foreach (var item in Model)
+    {
+        if (item.TinhTrang == false)
+        {
+            coutfalse++;
+        }
+    }
+
+    if (coutfalse != 0)
+    {
+        <b>ĐƠN HÀNG CHỜ XỬ LÝ</b>
+        <table class="table table-danger">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.NgayDatHang)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TongTien)
+                </th>
+                <th>
+                </th>
+            </tr>
+
+            @foreach (var item in Model)
+            {             <!-- Modal -->
+                if (item.TinhTrang == false)
+                {
+                    <tr>
+                        <td>
+                            @*@Html.DisplayFor(modelItem => item.NgayDatHang, "{0:dd/MM/yyyy}")*@
+                            @Convert.ToDateTime(item.NgayDatHang).ToString("dd/MM/yyyy")
+                        </td>
+                        <td>
+                            @*@Html.DisplayFor(modelItem => item.TongTien)*@
+                            @String.Format("{0:C}", item.TongTien)
+                        </td>
+                        <td>
+                            <!-- Button trigger modal -->
+                            <button type="button" class="btn btn-link" data-toggle="modal" data-target="#ctdh-@item.MaDonHang">
+                                Chi tiết
+                            </button>
+                        </td>
+                    </tr>
+                }
+
+                <div class="modal fade" id="ctdh-@item.MaDonHang" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" style="z-index: 1200">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLongTitle">Chi tiết đơn hàng</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="container-fluid">
+                                    <div class="row">
+                                        <div class="col-md-3"><b>Sản phẩm</b></div>
+                                        <div class="col-md-3"><b>Số lượng</b></div>
+                                        <div class="col-md-3"><b>Đơn giá</b></div>
+                                        <div class="col-md-3"><b>Thành tiền</b></div>
+                                    </div>
+                                    <hr>
+                                    @foreach (var item2 in item.ChiTietDonHang)
+                                    {
+                                        <div class="row">
+                                            <div class="col-md-3" style="word-wrap: break-word;">@item2.SanPham.TenSanPham</div>
+                                            <div class="col-md-3" style="word-wrap: break-word;">@item2.SoLuong</div>
+                                            <div class="col-md-3" style="word-wrap: break-word;">@string.Format("{0:c}", item2.DonGia)</div>
+                                            <div class="col-md-3" style="word-wrap: break-word;">@string.Format("{0:c}", item2.ThanhTien)</div>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </table>
+    }
+
+    int coutTrue = 0;
+    foreach (var item in Model)
+    {
+        if (item.TinhTrang == true)
+        {
+            coutTrue++;
+        }
+    }
+
+    if (coutTrue != 0)
+    {
+        <b>ĐƠN HÀNG ĐÃ GIAO</b>
+        <table class="table table-success">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.NgayDatHang)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.NgayGiaoHang)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TongTien)
+                </th>
+                <th>
+                </th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                if (item.TinhTrang == true)
+                {
+                    <tr>
+                        <td>
+                            @*@Html.DisplayFor(modelItem => item.NgayDatHang)*@
+                            @Convert.ToDateTime(item.NgayDatHang).ToString("dd/MM/yyyy")
+                        </td>
+                        <td>
+                            @Convert.ToDateTime(item.NgayGiaoHang).ToString("dd/MM/yyyy")
+                            @*@Html.DisplayFor(modelItem => item.NgayGiaoHang)*@
+                        </td>
+                        <td>
+                            @*@Html.DisplayFor(modelItem => item.TongTien)*@
+                            @String.Format("{0:C}", item.TongTien)
+                        </td>
+
+                        <td>
+                            <!-- Button trigger modal -->
+                            <button type="button" class="btn btn-link" data-toggle="modal" data-target="#ctdh-@item.MaDonHang">
+                                Chi tiết
+                            </button>
+                        </td>
+                    </tr>
+                }
+
+                <div class="modal fade" id="ctdh-@item.MaDonHang" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" style="z-index: 1200">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLongTitle">Chi tiết đơn hàng</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="container-fluid">
+                                    <div class="row">
+                                        <div class="col-md-3"><b>Sản phẩm</b></div>
+                                        <div class="col-md-3"><b>Số lượng</b></div>
+                                        <div class="col-md-3"><b>Đơn giá</b></div>
+                                        <div class="col-md-3"><b>Thành tiền</b></div>
+                                    </div>
+                                    <hr>
+                                    @foreach (var item2 in item.ChiTietDonHang)
+                                    {
+                                        <div class="row">
+                                            <div class="col-md-3" style="word-wrap: break-word;">@item2.SanPham.TenSanPham</div>
+                                            <div class="col-md-3" style="word-wrap: break-word;">@item2.SoLuong</div>
+                                            <div class="col-md-3" style="word-wrap: break-word;">@string.Format("{0:c}", item2.DonGia)</div>
+                                            <div class="col-md-3" style="word-wrap: break-word;">@string.Format("{0:c}", item2.ThanhTien)</div>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </table>
+    }
+}

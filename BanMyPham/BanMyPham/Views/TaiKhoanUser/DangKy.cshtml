@@ -1,0 +1,119 @@
+﻿@model BanMyPham.Models.KhachHang
+
+@{
+    ViewBag.Title = "Đăng ký";
+    <title>Đăng ký</title>
+    Layout = "~/Views/Layout/NguoiDung/_LayoutLoginUser.cshtml";
+}
+<div class="limiter">
+    <div class="container-login100">
+        <div class="wrap-login100 p-t-20 p-b-20">
+            <div class="login100-form validate-form">
+                <span class="login100-form-title p-b-20">
+                    Đăng ký
+                </span>
+                <div style="margin-top: 50px">
+
+                    @using (Html.BeginForm())
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <div class="row">
+                            <div class="col-md-5">
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.TenKhachHang)
+                                    <div>
+                                        @Html.EditorFor(model => model.TenKhachHang, new { htmlAttributes = new { @class = "wrap-input100" } })
+                                        @Html.ValidationMessageFor(model => model.TenKhachHang, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.TaiKhoan)
+                                    <div>
+                                        @Html.EditorFor(model => model.TaiKhoan, new { htmlAttributes = new { @class = "wrap-input100" } })
+                                        @Html.ValidationMessageFor(model => model.TaiKhoan, "", new { @class = "text-danger" })
+                                        @ViewBag.thongbao
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.MatKhau)
+                                    <div>
+                                        @Html.EditorFor(model => model.MatKhau, new { htmlAttributes = new { @class = "wrap-input100" } })
+                                        @Html.ValidationMessageFor(model => model.MatKhau, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.DiaChi)
+                                    <div>
+                                        @Html.EditorFor(model => model.DiaChi, new { htmlAttributes = new { @class = "wrap-input100" } })
+                                        @Html.ValidationMessageFor(model => model.DiaChi, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-5">
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.SoDienThoai)
+                                    <div>
+                                        @Html.EditorFor(model => model.SoDienThoai, new { htmlAttributes = new { @class = "wrap-input100" } })
+                                        @Html.ValidationMessageFor(model => model.SoDienThoai, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.GioiTinh)
+                                    <div>
+                                        <div class="checkbox">
+                                            @Html.DropDownListFor(model => model.GioiTinh,
+        new List<SelectListItem>(2) {
+        new SelectListItem { Text = "Nam", Value = "true",  },
+        new SelectListItem { Text = "Nữ", Value = "false"}
+    })
+                                            @Html.ValidationMessageFor(model => model.GioiTinh, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Email)
+                                    <div>
+                                        @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "wrap-input100" } })
+                                        @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4"></div>
+                            <div class="container-login100-form-btn col-md-4">
+                                <input type="submit" value="Đăng ký" class="login100-form-btn" />
+                            </div>
+                            <div class="col-md-4"></div>
+                        </div>
+                    }
+
+                    <ul class="login-more p-t-20">
+                        <li>
+                            <span class="txt1">
+                                Có tài khoản rồi hẽn?
+                            </span>
+
+                            <a href="@Url.Action("DangNhap","TaiKhoanUser")" class="txt2">
+                                Đăng nhập tại đây nè
+                            </a>
+                        </li>
+                    </ul>
+                    <ul class="login-more p-t-20">
+                        <li>
+                            <a href="@Url.Action("TrangChu","NguoiDung")" class="txt2">
+                                Về trang chủ
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
